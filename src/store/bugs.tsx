@@ -18,7 +18,7 @@ interface deleteBugsPayload {
 }
 
 // index
-let lastIndex = 0;
+let lastIndex = 1;
 
 // reducer
 const slice = createSlice({
@@ -46,19 +46,19 @@ const slice = createSlice({
     at RouterProvider (react-router-dom.js?v=c7272d47:6132:11)
     at RouterProvider2 (<anonymous>)`,
       resolved: false,
-      date: new Date(),
+      date: new Date().toDateString(),
     },
   ] as Bug[],
   reducers: {
     bugAdded: (bugs: Bug[], action: PayloadAction<AddBugPayload>) => {
       bugs.push({
-        id: ++lastIndex,
+        id: lastIndex++,
         desc: action.payload.desc,
         projectId: action.payload.projectId,
         error: action.payload.error,
         resolved: false,
-        date: new Date(),
-      });
+        date: new Date().toDateString(),
+      } as Bug);
     },
     deleteProjectBugs: (
       bugs: Bug[],
@@ -80,7 +80,9 @@ const slice = createSlice({
 const selectBugs = (state: { entities: { bugs: Bug[] } }) =>
   state.entities.bugs;
 
-export const getAllBugs = createSelector([selectBugs], (bugs: Bug[]) => bugs);
+export const getAllBugs = createSelector([selectBugs], (bugs: Bug[]) =>
+  bugs.slice(),
+);
 
 export const getProjectBugs = (projectId: number) =>
   createSelector([selectBugs], (bugs: Bug[]) =>

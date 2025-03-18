@@ -7,13 +7,14 @@ import {
 import { ClipboardList, Code } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./button";
+import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 
 export default function ErrorPopup({ errMsg }: { errMsg: string }) {
   const [open, setOpen] = useState<boolean>(false);
 
   const handleClose = () => setOpen(false);
 
-  const handleCopy = () => () => {
+  const handleCopy = () => {
     navigator.clipboard.writeText(errMsg);
     handleClose();
   };
@@ -25,17 +26,21 @@ export default function ErrorPopup({ errMsg }: { errMsg: string }) {
           Error <Code />
         </button>
       </DialogTrigger>
-      <DialogContent className="flex min-h-[40%] flex-col bg-white sm:max-w-[80%]">
-        <pre className="w-[inherit] flex-2 overflow-auto break-words">
-          {!errMsg ? "No error message" : errMsg}
-        </pre>
+      <DialogContent className="flex max-h-[80%] min-h-[40%] flex-col overflow-auto bg-white sm:max-w-[80%]">
+        <DialogTitle className="font-[poppins]">Error Msg</DialogTitle>
+        <DialogDescription
+          asChild
+          className="bg-foreground text-red-200 shadow-accent-foreground p-3 w-[inherit] flex-2 overflow-auto text-xs break-words"
+        >
+          <pre>{!errMsg ? "No error message" : errMsg}</pre>
+        </DialogDescription>
         <DialogFooter>
           <Button
             onClick={handleCopy}
             className="cursor-pointer opacity-45 duration-200 hover:opacity-100"
           >
             <ClipboardList />
-            copy
+            Copy
           </Button>
           <Button
             className="cursor-pointer opacity-45 duration-200 hover:opacity-100"

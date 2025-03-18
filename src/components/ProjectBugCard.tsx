@@ -63,7 +63,7 @@ const ProjectBugCard = ({ bug: b }: { bug: Bug }) => {
       <div className="flex items-center gap-1">
         <p className="text-[0.9rem]">Date Created: </p>
         <p className={`p-2 text-[0.8rem] opacity-65`}>
-          {b.date.toLocaleDateString()}
+          {b.date}
         </p>
       </div>
       {

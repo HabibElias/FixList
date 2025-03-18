@@ -21,11 +21,11 @@ export default function PopupCreate({ id }: { id: number }) {
   const descRef = useRef<HTMLTextAreaElement>(null);
   const errorRef = useRef<HTMLTextAreaElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission logic here
     if (descRef.current && errorRef.current)
-      store.dispatch(
+      await store.dispatch(
         bugAdded({
           desc: descRef.current.value,
           projectId: id,
@@ -46,7 +46,7 @@ export default function PopupCreate({ id }: { id: number }) {
           Create Bug
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-white sm:max-w-[425px]">
+      <DialogContent className="bg-white min-w-max sm:max-w-[425px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle>Create a Bug</DialogTitle>
@@ -62,7 +62,7 @@ export default function PopupCreate({ id }: { id: number }) {
               <Textarea
                 id="message"
                 ref={descRef}
-                className="max-h-50 lg:max-h-100"
+                className="max-h-50 max-w-100 overflow-auto lg:max-h-100"
                 required
               />
             </div>
@@ -75,7 +75,7 @@ export default function PopupCreate({ id }: { id: number }) {
               <Textarea
                 id="error"
                 ref={errorRef}
-                className="max-h-50 lg:max-h-100"
+                className="max-h-50 max-w-100 overflow-auto lg:max-h-100"
                 required
               />
             </div>

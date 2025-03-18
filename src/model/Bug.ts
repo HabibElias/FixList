@@ -4,5 +4,5 @@ export default interface Bug {
   projectId: number;
   resolved: boolean;
   error: string;
-  date: Date;
+  date: string;
 }

@@ -43,21 +43,26 @@ export default function PopupForm() {
           Create Project
         </button>
       </DialogTrigger>
-      <DialogContent className="bg-white sm:max-w-[425px]">
+      <DialogContent className="min-w-max bg-white sm:max-w-[425px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle>Create a Project</DialogTitle>
             <DialogDescription>
-              create a project with a description, to insert a list of bugs you
+              create a project with a description, to insert a list of bugs you <br />
               encountered during development
             </DialogDescription>
           </DialogHeader>
           <div className="py-4">
-            <div className="space-y-3 mb-3">
+            <div className="mb-3 space-y-3">
               <Label htmlFor="name" className="text-right">
                 Name
               </Label>
-              <Input id="name" ref={nameRef} required />
+              <Input
+                id="name"
+                className="max-w-100 overflow-auto"
+                ref={nameRef}
+                required
+              />
             </div>
             <div className="space-y-3">
               <Label htmlFor="message" className="text-center">
@@ -66,7 +71,7 @@ export default function PopupForm() {
               <Textarea
                 id="message"
                 ref={descRef}
-                className="max-h-50 lg:max-h-100"
+                className="max-h-50 max-w-100 overflow-auto lg:max-h-100"
                 required
               />
             </div>
