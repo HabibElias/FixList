@@ -1,12 +1,27 @@
 import ProjectBugCard from "@/components/ProjectBugCard";
-import { BugIcon, Info, Search, Table } from "lucide-react";
+import { BookTextIcon, Box, BoxIcon, BugIcon, Info, LucideNutOff, Search, Table, TableColumnsSplit, TableRowsSplit } from "lucide-react";
 import { getAllBugs } from "../store/bugs";
 import store from "../store/configureStore";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import Bug from "@/model/Bug";
 
 const AllBugsPage = () => {
   const [bugs, setBugs] = useState<Bug[]>(getAllBugs(store.getState()));
+  const [srcTxt, setSrcTxt] = useState<string>("");
+  const [isGrid, setIsGrid] = useState<boolean>(true);
+
+  const srcRef = useRef<HTMLInputElement>(null);
+
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault();
+    setSrcTxt(srcRef.current?.value || "");
+  };
+
+  const filtered = useMemo(() => {
+    return bugs.filter((b) =>
+      b.desc.toLowerCase().includes(srcTxt.toLowerCase()),
+    );
+  }, [srcTxt, bugs]);
 
   useEffect(() => {
     const unsubscribe = store.subscribe(() =>
@@ -28,15 +43,16 @@ const AllBugsPage = () => {
             All of your project bugs are displayed below
           </p>
         </div>
-        <form className="flex items-center">
+        <form className="flex items-center" onSubmit={handleSearch}>
           <input
             type="text"
-            className="flex-2 rounded-l-lg bg-gray-50 p-2 transition-colors duration-100 outline-none focus:bg-red-50"
+            ref={srcRef}
+            className="flex-2 rounded-l-lg bg-gray-50 p-2 transition-colors duration-100 outline-none focus:bg-red-50 dark:bg-[#181818]"
             placeholder="search..."
             name="search"
           />
           <button
-            className="flex-none cursor-pointer rounded-r-lg bg-red-300 p-2 opacity-40 transition-opacity duration-200 hover:opacity-100"
+            className="flex-none cursor-pointer rounded-r-lg bg-red-400 p-2 text-white opacity-40 transition-opacity duration-200 hover:opacity-100 dark:bg-red-400"
             type="submit"
           >
             <Search />
@@ -48,21 +64,32 @@ const AllBugsPage = () => {
           <BugIcon className="size-6 text-red-500" />
           All Bugs
         </div>
-        <div>
-          <Table />
-        </div>
+        <button 
+        className="hover:opacity-45 duration-200"
+        onClick={() => setIsGrid(!isGrid)}>
+          {isGrid ? <Table /> : <TableRowsSplit />}
+        </button>
       </div>
       <div
         className={
-          bugs.length === 0
+          filtered.length === 0
             ? "flex min-h-80 items-center justify-center"
-            : `grid grid-cols-2 gap-3`
+            : isGrid
+              ? `grid grid-cols-2 gap-3`
+              : `grid grid-cols-1 gap-3`
         }
       >
-        {bugs.map((b, index) => (
+        {filtered.map((b, index) => (
           <ProjectBugCard key={index} bug={b} />
         ))}
-        {bugs.length === 0 && <div className="opacity-45">No Bug To Fix</div>}
+        {filtered.length === 0 && !srcTxt && (
+          <div className="opacity-45">No Bug To Fix</div>
+        )}
+        {filtered.length === 0 && srcTxt && (
+          <div className="opacity-45">
+            There is no bug with the description of "{srcTxt}"
+          </div>
+        )}
       </div>
     </div>
   );

@@ -40,7 +40,7 @@ export default function PopupDelete({ id }: { id: number }) {
           Delete Project
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-white sm:max-w-[425px]">
+      <DialogContent className="bg-white sm:max-w-[425px] dark:bg-black">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle>Delete Project</DialogTitle>

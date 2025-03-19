@@ -43,7 +43,7 @@ export default function PopupForm() {
           Create Project
         </button>
       </DialogTrigger>
-      <DialogContent className="min-w-max bg-white sm:max-w-[425px]">
+      <DialogContent className="min-w-max bg-white dark:bg-black sm:max-w-[425px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle>Create a Project</DialogTitle>

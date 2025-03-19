@@ -54,7 +54,7 @@ const ProjectsPage = () => {
             <Link
               to={`/project/${p.id}`}
               key={p.id}
-              className="relative cursor-pointer rounded bg-red-50 p-3 font-[poppins] ring-red-300 duration-100 hover:scale-101 hover:bg-white hover:shadow-xl hover:ring-2"
+              className="relative cursor-pointer rounded bg-red-50 p-3 font-[poppins] ring-red-300 duration-100 hover:scale-101 hover:bg-white hover:shadow-xl hover:ring-2 dark:bg-[#ffffff57]"
             >
               <div className="text-xl font-bold tracking-tight">{p.pName}</div>
               <div className="text-xs opacity-45 lg:text-[0.9rem]">
@@ -67,7 +67,7 @@ const ProjectsPage = () => {
           );
         })}
         {projectList.length == 0 && (
-          <div className="flex items-center gap-2 opacity-45 font-[poppins]">
+          <div className="flex items-center gap-2 font-[poppins] opacity-45">
             No project created, please create a project.
             <PlusCircleIcon />
           </div>

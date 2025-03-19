@@ -1,5 +1,6 @@
 import { BugOff, Sun } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
+import DarkModeToggle from "./DarkModeToggle";
 
 const NavBar = () => {
   return (
@@ -15,9 +16,7 @@ const NavBar = () => {
       <ul className="flex items-center gap-[1.5rem] font-[poppins] transition-colors *:inline-block *:cursor-pointer *:duration-150 *:hover:opacity-30 [&_a.active]:opacity-30">
         <NavLink to={""}>Projects</NavLink>
         <NavLink to={"/allBugs"}>All bugs</NavLink>
-        <NavLink to={"/profile"}>
-          <Sun />
-        </NavLink>
+        <DarkModeToggle />
       </ul>
     </div>
   );

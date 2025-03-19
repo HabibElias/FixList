@@ -46,7 +46,7 @@ export default function PopupCreate({ id }: { id: number }) {
           Create Bug
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-white min-w-max sm:max-w-[425px]">
+      <DialogContent className="min-w-max bg-white sm:max-w-[425px] dark:bg-black">
         <form onSubmit={handleSubmit}>
           <DialogHeader>
             <DialogTitle>Create a Bug</DialogTitle>
