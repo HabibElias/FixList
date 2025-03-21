@@ -14,4 +14,4 @@ FixList is an application designed to help developers log and manage errors with
 - **Vite**: Provides fast builds and Hot Module Replacement (HMR).
 
 ### Deployment
-[FixList Deployment](https://fixlist.vercel.app/)https://fixlist.vercel.app/
+[](https://fixlist.vercel.app/)https://fixlist.vercel.app/
