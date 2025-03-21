@@ -1,9 +1,9 @@
 import ProjectBugCard from "@/components/ProjectBugCard";
-import { BookTextIcon, Box, BoxIcon, BugIcon, Info, LucideNutOff, Search, Table, TableColumnsSplit, TableRowsSplit } from "lucide-react";
+import Bug from "@/model/Bug";
+import { BugIcon, Info, Search, Table, TableRowsSplit } from "lucide-react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { getAllBugs } from "../store/bugs";
 import store from "../store/configureStore";
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
-import Bug from "@/model/Bug";
 
 const AllBugsPage = () => {
   const [bugs, setBugs] = useState<Bug[]>(getAllBugs(store.getState()));

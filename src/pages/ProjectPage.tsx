@@ -5,12 +5,14 @@ import Bug from "@/model/Bug";
 import { getProjectBugs } from "@/store/bugs";
 import store from "@/store/configureStore";
 import { getProject } from "@/store/projects";
-import { BugIcon, Table } from "lucide-react";
+import { BugIcon, Table, TableRowsSplit } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 const ProjectPage = () => {
   const { id } = useParams();
+  const [isGrid, setIsGrid] = useState<boolean>(true);
+
   if (!id) return;
 
   const project = getProject(parseInt(id))(store.getState());
@@ -42,7 +44,7 @@ const ProjectPage = () => {
           <PopupDelete id={project.id} />
         </div>
       </div>
-      <div className="mb-7">
+      <div className="mb-7 break-words">
         <p className="text-[0.7rem] opacity-45">Description</p>
         <p>{project.desc}</p>
       </div>
@@ -51,15 +53,20 @@ const ProjectPage = () => {
           <BugIcon className="size-6 text-red-500" />
           Bugs
         </div>
-        <div>
-          <Table />
-        </div>
+        <button
+          className="duration-200 hover:opacity-45"
+          onClick={() => setIsGrid(!isGrid)}
+        >
+          {isGrid ? <Table /> : <TableRowsSplit />}
+        </button>
       </div>
       <div
         className={
           pBugs.length === 0
-            ? "flex items-center justify-center min-h-80"
-            : `grid grid-cols-2 gap-3`
+            ? "flex min-h-80 items-center justify-center"
+            : isGrid
+              ? `grid grid-cols-2 gap-3`
+              : `grid grid-cols-1 gap-3`
         }
       >
         {pBugs.map((b, index) => (

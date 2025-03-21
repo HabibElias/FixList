@@ -1,4 +1,4 @@
-import { BugOff, Sun } from "lucide-react";
+import { BugOff } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
 import DarkModeToggle from "./DarkModeToggle";
 

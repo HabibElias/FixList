@@ -18,11 +18,11 @@ let lastId = 1;
 const slice = createSlice({
   name: "projects",
   initialState: [
-    {
-      id: 1,
-      desc: "a lyrics application for my choir",
-      pName: "Basleal",
-    },
+    // {
+    //   id: 1,
+    //   desc: "a lyrics application for my choir",
+    //   pName: "Basleal",
+    // },
   ] as Project[],
   reducers: {
     createProject: (

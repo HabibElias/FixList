@@ -23,7 +23,7 @@ const ProjectBugCard = ({ bug: b }: { bug: Bug }) => {
       {
         // description
       }
-      <div className="flex-2 *:inline">
+      <div className="flex-2 *:inline break-words">
         <p className="text-[0.9rem]">Desc: </p>
         <p
           className={`text-[0.8rem] ${b.resolved ? "line-through" : ""} opacity-70`}
